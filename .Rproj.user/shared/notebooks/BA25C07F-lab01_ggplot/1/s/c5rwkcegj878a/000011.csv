@@ -1,0 +1,7 @@
+"0","ggplot("
+"0","  data = penguins,"
+"0","  mapping = aes(x = flipper_length_mm, y = body_mass_g)"
+"0",") +"
+"0","  geom_point(mapping = aes(color = bill_depth_mm)) +"
+"0","  geom_smooth(method = ""gam"") +"
+"0","  labs(caption=""Data come from the palmerpenguins package"")"

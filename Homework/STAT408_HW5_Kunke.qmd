@@ -1,0 +1,19 @@
+---
+title: "Homework 5"
+date: "Jan 26 2026"
+author: "Jess Kunke"
+format: html
+---
+
+Here is a scatterplot of two variables from the `penguins` dataset: flipper length in millimeters and body mass in grams. The points are colored based on the penguin species.
+
+```{r}
+ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g, color = species)) +
+  geom_point()
+
+View(penguins)
+?penguins
+```
+
+
+

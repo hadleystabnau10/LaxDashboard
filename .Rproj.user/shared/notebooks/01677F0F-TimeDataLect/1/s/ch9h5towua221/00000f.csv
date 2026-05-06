@@ -1,0 +1,4 @@
+"0","flights_dt |> "
+"0","  filter(dep_time < ymd(20130102)) |> "
+"0","  ggplot(aes(x = dep_time)) + "
+"0","  geom_freqpoly(binwidth = 600) # 600 s = 10 minutes"

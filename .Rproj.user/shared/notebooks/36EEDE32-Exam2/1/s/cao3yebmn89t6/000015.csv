@@ -1,0 +1,6 @@
+"0","clean_rivers1 <- rivers %>% "
+"0","  drop_na() |>"
+"0","  mutate(site = case_when(site == ""Madison River"" ~ ""Madison"","
+"0","                          site == ""Gallatiin"" ~ ""Gallatin"","
+"0","                          TRUE ~ site))"
+"0",""

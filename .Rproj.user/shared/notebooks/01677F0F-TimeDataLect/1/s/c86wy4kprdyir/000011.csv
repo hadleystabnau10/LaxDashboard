@@ -1,0 +1,4 @@
+"0",""
+"0","flights |> "
+"0","  select(year, month, day, hour, minute) |> "
+"0","  mutate(departure = make_datetime(year, month, day, hour, minute))"

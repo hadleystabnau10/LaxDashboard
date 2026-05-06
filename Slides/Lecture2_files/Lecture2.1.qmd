@@ -1,0 +1,32 @@
+---
+title: "Lecture 2 Activity 2"
+author: "Hadley Stabnau"
+date: "Jan 20,2026"
+format: html
+editor: visual
+---
+## Load Packages
+
+First, in order to create a plot with our penguin data, we must load the package that we already have installed on our computer, called palmerpenguins.
+If you do not already have the palmerpenguins package downloaded, then delete the # before the top line of code and install the package. After you've installed the package then comment that line out again so that your computer doesn't attempt to install that package every time that code chunk is run. 
+```{r}
+#| message: false
+#install.packages(palmerpenguins)
+library(palmerpenguins)
+
+
+```
+
+
+## Create Plot
+
+Now that we have loaded the necessesary packages, we can build a simple plot of 
+
+You can add options to executable code like this
+
+```{r}
+#| echo: False
+2 * 2
+```
+
+The `echo: false` option disables the printing of code (only output is displayed).

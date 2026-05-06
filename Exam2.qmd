@@ -1,0 +1,160 @@
+---
+title: "Exam 2"
+author: "Hadley Stabnau"
+date: "March 30, 2026"
+format: pdf
+editor: visual
+---
+
+# Code
+
+## Reading in the rivers data: 
+```{r, echo=TRUE, message=FALSE}
+library(tidyverse)
+rivers <- read_csv("/Users/hadleystabnau/Desktop/STAT408/data/rivers.csv")
+names(rivers)
+```
+
+
+## Cleaning up the data: 
+
+Here, I removed the rows of the rivers dataset that have NA in the pH column, so that I can make a table or graph with some variable relating to pH. I also fixed the misspellings or non-consistent names for each different site.
+
+```{r, echo=TRUE, results='hide'}
+clean_rivers1 <- rivers %>% 
+  drop_na() |>
+  mutate(site = case_when(site == "Madison River" ~ "Madison",
+                          site == "Gallatiin" ~ "Gallatin",
+                          TRUE ~ site))
+
+```
+
+
+
+## Table: 
+
+Here, I created a new form of the rivers data in order to summarize it into averages with only two decimal places. 
+Then, I simply made the table using `kable()`.
+
+```{r, echo=TRUE, results='hide'}
+library(knitr)
+clean_rivers2 <- clean_rivers1 |>
+  group_by(site) |>
+  summarize(
+    avg_DO = mean(dissolved_oxygen, na.rm=TRUE),
+    avg_temp = mean(temperature, na.rm=TRUE),
+    avg_pH = mean(pH, na.rm=TRUE)
+    ) |>
+  mutate(avg_DO = round(avg_DO, 2),
+         avg_temp = round(avg_temp, 2),
+         avg_pH = round (avg_pH, 2)
+         )
+kable(clean_rivers2)
+```
+## Plot 1
+
+First, I created temp_count which retrieves the number of times each site's temperature went above 25 degrees F. I summarize the number of times the count was over 25, and call it `count_over_25`
+Then, I grouped it by site and made a column graph putting site on the x axis and `count_over_25` on the y axis. 
+
+```{r, echo=TRUE, fig.show='hide'}
+temp_count <- clean_rivers1 |>
+  filter(temperature > 25) |>
+  group_by(site) |>
+  summarize(count_over_25 = n())
+
+ggplot(temp_count, aes(x=site, y=count_over_25, fill = site)) +
+  geom_col() +
+  labs(x="Site", y="Count Over 25 Degrees F")
+```
+
+## Reading in the wqs data:
+
+```{r, echo=TRUE, results='hide'}
+library(tidyverse)
+wqs <- read_csv("/Users/hadleystabnau/Desktop/STAT408/data/wqs.csv")
+names(wqs)
+```
+
+## Plot 2
+
+First I make a new column called month_num that gives the month number of each observation (6, 7, 8 or 9). 
+
+```{r, echo=TRUE, results='hide'}
+library(lubridate)
+clean_rivers1$month_num <- month(mdy(clean_rivers1$date))
+
+```
+
+
+Then, I create thresholds for each of the sites that they cannot exceed. Order and perfect spelling was very important here. 
+
+```{r}
+thresholds <- data.frame(
+  site = c("Gallatin", "Gallatin", "Gallatin", "Gallatin",
+           "Missouri", "Missouri", "Missouri", "Missouri",
+           "Madison", "Madison", "Madison", "Madison",
+           "Yellowstone", "Yellowstone", "Yellowstone", "Yellowstone"),
+  month_num = c(6, 7, 8, 9,
+            6, 7, 8, 9,
+            6, 7, 8, 9,
+            6, 7, 8, 9),
+  threshold = c(24, 25, 26, 25,
+                24, 25, 26, 25,
+                24, 25, 26, 25,
+                24, 24, 25, 25)
+)
+```
+
+
+Now, I join the thresholds and filter them by month AND site. I created the variable- `obs_above` which counts the number of observations that go above each respective threshold.
+
+```{r}
+rivers_plot <- clean_rivers1 |>
+  left_join(thresholds, by = c("site", "month_num")) |>
+  group_by(site, month_num) |>
+  summarise(obs_above = sum(temperature > threshold), .groups = 'drop')
+```
+
+
+I plot site on the x axis vs number of observations above the threshold, or `obs_above` on the y axis.
+```{r, echo=TRUE, fig.show='hide'}
+library(ggplot2)
+
+ggplot(rivers_plot, aes(x=site, y=obs_above, fill = site)) +
+  geom_col() +
+  labs(x="Site", y="Count Above Threshold")
+```
+
+
+# Results 
+
+## Table 
+
+```{r, echo=FALSE}
+library(knitr)
+
+         
+kable(clean_rivers2) 
+  
+```
+This table simple shows averages for all three of the variables, separated for each site. 
+
+## Plot 1
+
+```{r, echo=FALSE}
+
+ggplot(temp_count, aes(x=site, y=count_over_25)) +
+  geom_col() +
+  labs(x="Site", y="Count Over 25 Degrees F", title = "Times River Temp > 25 degress")
+```
+This plot shows the number of times each site had a temperature above 25. You can see that the Madison is not on this graph, that means the temperature in the madison never went above 25 degrees.
+
+
+## Plot 2
+
+```{r, echo=FALSE}
+ggplot(rivers_plot, aes(x=site, y=obs_above, fill = site)) +
+  geom_col() +
+  labs(x="Site", y="Count Above Threshold", title = "Times River Temp > Threshold")
+```
+This plot shows the number of times that each site had a temperature above the threshold given by the water quality standards data set. The Madison and the Missouri are not showing any data on this graph, that makes sense for the Madison as it never even reached temperature above 25 degrees, but we see that the Missouri also never reached temperatures above the standard. 

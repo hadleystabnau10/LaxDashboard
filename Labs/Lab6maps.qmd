@@ -1,0 +1,118 @@
+---
+title: "STAT 408: Lab 6: Maps"
+author: "Hadley Stabnau"
+date: "Feb 19, 2026"
+format: html
+editor: visual
+---
+
+```{r, message=FALSE}
+
+#install.packages("ggthemes")
+#install.packages("patchwork")
+library(ggplot2)
+library(ggthemes)
+library(patchwork)
+library(dplyr)
+library(readr)
+library(sf)
+```
+
+
+```{r}
+atlas <- readr::read_rds(
+  "https://github.com/viniciusoike/restateinsight/raw/main/static/data/atlas_sp_hdi.rds"
+)
+```
+
+
+
+ 
+## Making the Graph
+```{r}
+pmap <- ggplot(atlas) +
+  geom_sf(aes(fill = log10(pop)), 
+          lwd = 0.05, 
+          color = "white") +
+  scale_fill_fermenter(
+    name = "",
+    direction = 1,
+    palette = "YlGnBu" 
+  ) +
+  labs(
+    title = "Population in Sao Paulo, BR (2010)",
+    subtitle = "log_10(population)",
+    caption = "Source: Atlas Brasil"
+  ) +
+  theme_map() +
+  theme(legend.position = "top",
+    legend.justification = 0.5,
+    legend.key.size = unit(1.25, "cm"),
+    legend.key.width = unit(1.75, "cm"),
+    legend.text = element_text(size = 12),
+    legend.margin = margin(),
+    plot.title = element_text(size = 28, hjust = 0.5),
+    plot.subtitle = element_text(hjust = 0.5)
+  )
+pmap
+
+```
+
+## Making the bar chart
+```{r}
+hdi_pop <- atlas |>
+  st_drop_geometry() |>
+  mutate(
+    log_pop = log10(pop)
+  ) |>
+  mutate(
+    group_pop = cut(
+      log_pop, 
+      breaks = c(0, 2.5, 3.0, 3.5, 4.0, 4.5, Inf),
+      right = TRUE
+    )
+  ) |>
+  group_by(group_pop) |>
+  summarise(mean_hdi = mean(HDI, na.rm = TRUE)) |>
+  ungroup() |>
+  na.omit()
+
+x_labels <- c(
+  "2.5 or less", "2.5 to 3.0", "3.0 to 3.5", "3.5 to 4.0",
+  "4.0 to 4.5", "4.5 or more") 
+
+pcol <- ggplot(hdi_pop, aes(x = group_pop, y = mean_hdi, fill = group_pop)) +
+  geom_col() +
+  geom_hline(yintercept = 0) +
+  coord_flip() +
+  scale_fill_brewer(palette = "YlGnBu") +
+  scale_x_discrete(labels = x_labels) +
+  guides(fill = "none", color = "none") +
+  labs(title = "Mean HDI by population group") +
+  theme_void() +
+  theme(
+    panel.grid = element_blank(),
+    plot.title = element_text(size = 14),
+    axis.text.y = element_text(size = 8),
+    axis.text.x = element_blank()
+  )
+```
+
+
+
+## Putting them together
+```{r}
+p_hdi_atlas <- 
+  pmap + inset_element(pcol, left = 0.5, bottom = 0.05, right = 1, top = 0.5)
+
+p_hdi_atlas
+```
+
+Overall, most of the changes made to the example code, were made instead of the functions. For the first code chunk that generates the actual map plot, anywhere that initially said HDI was pretty much just changed to say population, the breaks were removed from inside of the `scale_fill_fermenter` function, and then I added labels, titles, and a theme map legend. Then, to make the bar graph, I made two mutations one to make a column called `log_pop` that has the log_10 of the population, and another called `group_pop` to to split population into different groups, 2.5 and less, 2.5-3, 3-3.5, 3.5-4, 4-4.5, 4.5 and more. Then, I grouped the data by these pop_groups, and made the ggplot. I did ggplot with the new `group_pop` variable `mean_hdi` as the x and y. I then made columns and flipped coordinated just as in the example code, I created labels and the rest of the putting it together code came right from the notes. 
+
+
+
+
+
+
+

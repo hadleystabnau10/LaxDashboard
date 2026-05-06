@@ -1,0 +1,4 @@
+"0","rivers_plot <- clean_rivers1 |>"
+"0","  left_join(thresholds, by = c(""site"", ""month_num"")) |>"
+"0","  group_by(site, month_num) |>"
+"0","  summarise(obs_above = sum(temperature > threshold), .groups = 'drop')"

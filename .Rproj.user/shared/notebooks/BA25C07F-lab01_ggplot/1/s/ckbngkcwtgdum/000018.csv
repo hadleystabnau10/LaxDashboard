@@ -1,0 +1,4 @@
+"0",""
+"0",""
+"0","ggplot(data = penguins,mapping = aes(x = species, y = bill_depth_mm)) + "
+"0","  geom_point()"

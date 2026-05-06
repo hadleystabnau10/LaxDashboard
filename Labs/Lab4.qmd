@@ -1,0 +1,92 @@
+---
+title: "Lab 4: Putting it all together"
+author: "Hadley Stabnau"
+date: "Feb 5, 2026"
+format: pdf
+---
+
+# Reading in data
+
+```{r, message=FALSE}
+library(tidyverse)
+
+relig_income <- read_csv(
+  "~/Desktop/STAT408/relig_income.csv",
+  skip = 2
+  
+)
+
+```
+
+In order to read in this data, I had to first load the tidyverse package in order to be able to use the `read_csv()` function. 
+Next, I read in the data, using an absolute file path. Then, I had to skip the first two lines of the data from relig_income.csv, as they are not actually part of the data.
+
+
+
+# Exploring the data
+
+```{r, echo=FALSE}
+ncol(relig_income)
+nrow(relig_income)
+variable.names(relig_income)
+
+```
+* There are 11 columns/variables in the religios income dataset, these are: Religion of respondent, <$10k, $10-20k, $20-$30k, $30-$40k, $40-$50k, $50-$75k, $75-$100k, $100-$150k, >$150k, and Don't know/refused.
+* There are 18 rows of this dataset, indicating 18 different religions included.
+* The first column/variable contains qualitative values that are of the categorical variable: religion. The other columns have quantitative values. None of the variables have missing values and at first glance, I think some kind of bar graph would be useful for visualizing. 
+
+
+# Summary Statistics
+
+```{r}
+relig_income |>
+  select(`Religion of respondent`, `<$10k`) |>
+  arrange(desc(`<$10k`)) 
+  
+```
+* The religion with the most amount of people in the less than $10 thousand dollar income group is the evangelical protestants.
+
+```{r}
+relig_income |>
+  select(`Religion of respondent`, `>150k`) |>
+  arrange(desc(`>150k`))
+```
+* The religion with the most amount of people in the greater than 150 thousand dollar income group is the mainline protestants, followed very closely by the Catholics.
+
+
+# Plot the Data
+
+```{r, message=FALSE}
+library(tidyverse)
+
+relig_long = relig_income |>
+  pivot_longer(
+    cols = -`Religion of respondent`,
+    names_to = "Income Group",
+    values_to = "Count"
+  )
+
+ggplot(data = relig_long,
+       aes(
+         x = `Income Group`,        
+         y = Count,
+         fill = `Religion of respondent`  
+       )) +
+  geom_col() +  
+  labs(
+    x = "Income Group",
+    y = "Number of Respondents",
+    fill = "Religion",
+    title = "Income Across Different Religions"
+  ) 
+  
+
+
+```
+* I could not quite figure out how to orient the labels in a way so that they aren't so squished you can't read them. But the rest of the graph is organized and labeled. The different bars are representing each income group and the different colors of the bars represent the religions that make up each of the bars. 
+
+
+# Analysis
+
+* This data could be examined further to look at the number of responses across the different income groups. Some of the bars are much taller than others, it makes me wonder what kind of bias/obstacles lead to more data in some groups than others. I mentioned before that I don't feel like I yet have the skills to further organize the labels of income groups across the x axis. Another thing that I would like to do with this data if I had the skills, is use R to look at the percentages of each religion in each income group and compare them. I earlier looked at counts, but it would be cool to ouse R to simply pull up the percent of each religion in each group all in one tabel for analysis. 
+

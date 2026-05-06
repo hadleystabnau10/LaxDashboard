@@ -1,0 +1,4 @@
+"0","lax_women |>"
+"0","  ggplot(aes(x=goals_per_game, y=win_pctg)) +"
+"0","  geom_point() +"
+"0","  labs(title= ""Womens D1 Lacrosse"",x=""Average Goals Per Game"", y=""Win %"")"

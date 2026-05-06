@@ -1,0 +1,33 @@
+---
+title: "Project Proposal"
+author: "Hadley Stabnau"
+due: "Apr 2 2026"
+format: pdf
+editor: visual
+---
+
+I will be working alone for this project. The dataset I will be using comes from scorenetwork.org. This is a website that displays a variety of statistics for different divisions, levels and leagues for a large amount of sports in the USA.
+
+For this project, I will be using the team statistics for NCAA D1 Women's Lacrosse. The data includes 120 different division one teams and their statistics from the 2022-2023 season. With this data, I plan to group the teams geographically by region/conference. Then, I want to look at some trends among and within each conference.
+
+```{r, message=FALSE}
+library(tidyverse)
+
+lax_women <- read_csv("/Users/hadleystabnau/Desktop/STAT408/data/lacrosse_women_ncaa_div1_2022_2023.csv")
+
+
+```
+
+For this intro, I will just plot the data looking at each team's average goals per game vs their win % as a team.
+
+```{r}
+names(lax_women)
+```
+
+```{r}
+lax_women |>
+  ggplot(aes(x=goals_per_game, y=win_pctg)) +
+  geom_point() +
+  labs(title= "Womens D1 Lacrosse",x="Average Goals Per Game", y="Win %")
+  
+```

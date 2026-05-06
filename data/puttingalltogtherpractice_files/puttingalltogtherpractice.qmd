@@ -1,0 +1,37 @@
+---
+title: "Untitled"
+format: html
+---
+
+# Plot Rank by Week for Billboard Data
+
+## load tidyverse
+
+```{r, message=FALSE}
+library(tidyverse)
+```
+
+## pivot data longer
+
+## change week column to be by number (numberic only)
+
+```{r}
+billboard_long = billboard |>
+  pivot_longer(
+    cols = wk1:wk76, 
+    names_to = "week", 
+    values_to = "rank",
+    values_drop_na = TRUE
+  ) |>
+  mutate(week = parse_number(week))
+#the above reads through all the wk1, wķ2... and arranges numerically
+
+#plot rank by week using long format
+ggplot(billboard_long, aes(x = week, y = rank, group = track)) +
+  geom_line() +
+  #the following line transforms the data to flip x and y i think
+  scale_y_reverse() +
+  labs(x = "Week", y = "Rank") +
+  theme_bw()
+```
+

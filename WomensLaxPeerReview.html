@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Hadley Stabnau">
+<meta name="dcterms.date" content="2026-04-16">
+
+<title>Women’s D1 Lacrosse</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="WomensLaxPeerReview_files/libs/clipboard/clipboard.min.js"></script>
+<script src="WomensLaxPeerReview_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="WomensLaxPeerReview_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="WomensLaxPeerReview_files/libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="WomensLaxPeerReview_files/libs/quarto-html/popper.min.js"></script>
+<script src="WomensLaxPeerReview_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="WomensLaxPeerReview_files/libs/quarto-html/anchor.min.js"></script>
+<link href="WomensLaxPeerReview_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="WomensLaxPeerReview_files/libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="WomensLaxPeerReview_files/libs/quarto-html/quarto-syntax-highlighting-dark-707d8167ce6003fca903bfe2be84ab7f.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="WomensLaxPeerReview_files/libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="WomensLaxPeerReview_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="WomensLaxPeerReview_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="WomensLaxPeerReview_files/libs/bootstrap/bootstrap-6401fd5e6f754994e8af8f56e8236ab2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="WomensLaxPeerReview_files/libs/bootstrap/bootstrap-dark-6401fd5e6f754994e8af8f56e8236ab2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="WomensLaxPeerReview_files/libs/bootstrap/bootstrap-6401fd5e6f754994e8af8f56e8236ab2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="WomensLaxPeerReview_files/libs/quarto-dashboard/quarto-dashboard.js"></script>
+<script src="WomensLaxPeerReview_files/libs/quarto-dashboard/stickythead.js"></script>
+
+
+
+<script src="WomensLaxPeerReview_files/libs/quarto-dashboard/web-components.js" type="module"></script>
+<script src="WomensLaxPeerReview_files/libs/quarto-dashboard/components.js"></script>
+
+<link href="WomensLaxPeerReview_files/libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet">
+<script src="WomensLaxPeerReview_files/libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<link href="WomensLaxPeerReview_files/libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
+<script src="WomensLaxPeerReview_files/libs/datatables-binding-0.34.0/datatables.js"></script>
+<script src="WomensLaxPeerReview_files/libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<link href="WomensLaxPeerReview_files/libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="WomensLaxPeerReview_files/libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet">
+<script src="WomensLaxPeerReview_files/libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
+<link href="WomensLaxPeerReview_files/libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet">
+<script src="WomensLaxPeerReview_files/libs/crosstalk-1.2.2/js/crosstalk.min.js"></script>
+
+
+</head>
+
+<body class="quarto-dashboard dashboard-fill dashboard-sidebar fullcontent quarto-light">
+
+<header id="quarto-dashboard-header">
+<nav class="navbar navbar-expand-md slim" data-bs-theme="dark">
+  <div class="navbar-container container-fluid">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-controls="dashboard-collapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>    
+
+
+    <div class="navbar-brand-container">
+    <a href="#"><img src="images/logo.png" alt="" class="navbar-logo light-content d-inline-block"></a>
+    <a href="#"><img src="images/logo.png" alt="" class="navbar-logo dark-content d-inline-block"></a>
+      <div class="navbar-title">
+        <div class="navbar-title-text"><a href="#">Women’s D1 Lacrosse</a></div>
+        
+        <div class="navbar-author">Hadley Stabnau</div>
+      </div>
+    </div>
+<div id="dashboard-collapse" class="navbar-collapse collapse"><ul class="navbar-nav navbar-nav-scroll me-auto" role="tablist"><li class="nav-item" role="presentation"><a id="tab-all" class="nav-link active" data-bs-toggle="tab" role="tab" data-bs-target="#all" data-scrolling="false" href="#all" aria-controls="all" aria-selected="true"><span class="nav-link-text">All</span></a></li><li class="nav-item" role="presentation"><a id="tab-offensive-stats" class="nav-link" data-bs-toggle="tab" role="tab" data-bs-target="#offensive-stats" data-scrolling="false" href="#offensive-stats" aria-controls="offensive-stats" aria-selected="false"><span class="nav-link-text">Offensive Stats</span></a></li><li class="nav-item" role="presentation"><a id="tab-defensive-stats" class="nav-link" data-bs-toggle="tab" role="tab" data-bs-target="#defensive-stats" data-scrolling="false" href="#defensive-stats" aria-controls="defensive-stats" aria-selected="false"><span class="nav-link-text">Defensive Stats</span></a></li><li class="nav-item" role="presentation"><a id="tab-data" class="nav-link" data-bs-toggle="tab" role="tab" data-bs-target="#data" data-scrolling="false" href="#data" aria-controls="data" aria-selected="false"><span class="nav-link-text">Data</span></a></li></ul></div></div>
+</nav>
+</header>
+<div class="page-layout-custom quarto-dashboard-content bslib-gap-spacing html-fill-container bslib-page-fill quarto-dashboard-pages dashboard-sidebar-container">  
+
+<div class="bslib-sidebar-layout html-fill-item html-fill-container" data-bslib-sidebar-open="desktop" data-bslib-sidebar-init="true" data-bslib-sidebar-border="false" data-bslib-sidebar-border-radius="false"><div class="main html-fill-container html-fill-item"><div class="sidebar-content html-fill-item html-fill-container">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-columns: minmax(3em, 1fr);
+grid-auto-rows: minmax(0, 1fr);">
+<div class="card bslib-card html-fill-container html-fill-item" data-fill="false" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card-body html-fill-item html-fill-container">
+<div class="{.collapse=&quot;true&quot;} tab-content html-fill-item html-fill-container">
+<div id="all" class="dashboard-page tab-pane show active html-fill-item html-fill-container" data-orientation="rows" aria-labelledby="tab-all">
+<div class="html-fill-item html-fill-container bslib-grid" style="display: grid; grid-template-rows: minmax(3em, max-content) minmax(3em, 1fr) minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card html-fill-item html-fill-container bslib-card" data-fill="false" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card-body html-fill-item html-fill-container">
+<p>This dashboard desplays statistics for women’s division 1 lacrosse data from the 2022-2023 season. 120 teams are included in the division among 18 different regional conferences. The data has been plotted to show goals for vs against for each team. Then, clusters were created based on offensive stats for each team, and then those clusters were compared to a plot of defensive stats for each team.</p>
+<p>We will be looking at various comparisons among the different teams in both offensive and defensive aspects of the game.</p>
+</div>
+<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="WomensLaxPeerReview_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="WomensLaxPeerReview_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div>
+<div id="offensive-stats" class="dashboard-page tab-pane grid-skip html-fill-item html-fill-container" data-orientation="rows" aria-labelledby="tab-offensive-stats">
+<div class="html-fill-item html-fill-container bslib-grid" style="display: grid; grid-template-rows: minmax(3em, 1fr) minmax(3em, 1fr) minmax(3em, max-content); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="WomensLaxPeerReview_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="WomensLaxPeerReview_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+<div class="card html-fill-item html-fill-container bslib-card" data-fill="false" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card-body html-fill-item html-fill-container">
+<p>This tab shows some compared offensive data among the different regions. Average goals among conference was not that interesting, so I plotted the winning % for each conference to see a bit more obvious differences. Then a plot was created to show shot volume vs actual shots that landed in the goal.</p>
+</div>
+<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div>
+<div id="defensive-stats" class="dashboard-page tab-pane grid-skip html-fill-item html-fill-container" data-orientation="rows" aria-labelledby="tab-defensive-stats">
+<div class="html-fill-item html-fill-container bslib-grid" style="display: grid; grid-template-rows: minmax(3em, 1fr) minmax(3em, 1fr) minmax(3em, max-content); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<table class="caption-top table table-sm table-striped small">
+<caption>Top 10 Turnover Teams</caption>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Rank</th>
+<th style="text-align: center;">Team</th>
+<th style="text-align: center;">Caused_Turnovers</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">Campbell (Big South)</td>
+<td style="text-align: center;">14.11</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">Denver (Big East)</td>
+<td style="text-align: center;">12.65</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">Liberty (ASUN)</td>
+<td style="text-align: center;">12.47</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">Vermont (America East)</td>
+<td style="text-align: center;">12.44</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">Mercer (Big South)</td>
+<td style="text-align: center;">12.30</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">Fairfield (MAAC)</td>
+<td style="text-align: center;">11.47</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">High Point (Big South)</td>
+<td style="text-align: center;">10.72</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">Southern California (Pac-12)</td>
+<td style="text-align: center;">10.65</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">9</td>
+<td style="text-align: center;">Duke (ACC)</td>
+<td style="text-align: center;">10.61</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">Yale (Ivy League)</td>
+<td style="text-align: center;">10.47</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell-output-display html-fill-item html-fill-container">
+<table class="caption-top table table-sm table-striped small">
+<caption>Top 10 Clearing Teams</caption>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Rank</th>
+<th style="text-align: center;">Team</th>
+<th style="text-align: center;">Clear_Percent</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">North Carolina (ACC)</td>
+<td style="text-align: center;">0.940</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">Florida (AAC)</td>
+<td style="text-align: center;">0.939</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">Maryland (Big Ten)</td>
+<td style="text-align: center;">0.934</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">Northwestern (Big Ten)</td>
+<td style="text-align: center;">0.924</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">Yale (Ivy League)</td>
+<td style="text-align: center;">0.924</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">VCU (Atlantic 10)</td>
+<td style="text-align: center;">0.922</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">Virginia (ACC)</td>
+<td style="text-align: center;">0.921</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">James Madison (AAC)</td>
+<td style="text-align: center;">0.918</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">9</td>
+<td style="text-align: center;">Virginia Tech (ACC)</td>
+<td style="text-align: center;">0.918</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">East Carolina (AAC)</td>
+<td style="text-align: center;">0.915</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="WomensLaxPeerReview_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+<div class="card html-fill-item html-fill-container bslib-card" data-fill="false" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card-body html-fill-item html-fill-container">
+<p>Defensive statistic are shown including the tables of top 10 teams. The first table shows the top 10 teams for caused turnovers and second shows the top 10 teams for clearing.</p>
+</div>
+<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div>
+<div id="data" class="dashboard-page tab-pane grid-skip html-fill-item html-fill-container" data-orientation="rows" aria-labelledby="tab-data">
+<div class="html-fill-item html-fill-container bslib-grid" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<div class="datatables html-widget html-fill-item html-fill-container" id="htmlwidget-0dc2a931752ae4f30d75" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-0dc2a931752ae4f30d75">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72","73","74","75","76","77","78","79","80","81","82","83","84","85","86","87","88","89","90","91","92","93","94","95","96","97","98","99","100","101","102","103","104","105","106","107","108","109","110","111","112","113","114","115","116","117","118","119","120"],["Akron (MAC)","American (Patriot)","Arizona St. (Pac-12)","Army West Point (Patriot)","Binghamton (America East)","Boston College (ACC)","Boston U. (Patriot)","Brown (Ivy League)","Bryant (America East)","Bucknell (Patriot)","Butler (Big East)","California (Pac-12)","Campbell (Big South)","Canisius (MAAC)","Central Conn. St. (NEC)","Central Mich. (MAC)","Cincinnati (AAC)","Clemson (ACC)","Coastal Carolina (ASUN)","Colgate (Patriot)","Colorado (Pac-12)","Columbia (Ivy League)","Cornell (Ivy League)","Dartmouth (Ivy League)","Davidson (Atlantic 10)","Delaware (CAA)","Delaware St. (ASUN)","Denver (Big East)","Detroit Mercy (MAC)","Drexel (CAA)","Duke (ACC)","Duquesne (Atlantic 10)","East Carolina (AAC)","Eastern Mich. (MAC)","Elon (CAA)","FDU (NEC)","Fairfield (MAAC)","Florida (AAC)","Furman (Big South)","Gardner-Webb (Big South)","George Mason (Atlantic 10)","George Washington (Atlantic 10)","Georgetown (Big East)","Harvard (Ivy League)","High Point (Big South)","Hofstra (CAA)","Holy Cross (Patriot)","Iona (MAAC)","Jacksonville (ASUN)","James Madison (AAC)","Johns Hopkins (Big Ten)","Kennesaw St. (ASUN)","Kent St. (MAC)","LIU (NEC)","La Salle (Atlantic 10)","Lafayette (Patriot)","Lehigh (Patriot)","Liberty (ASUN)","Longwood (Big South)","Louisville (ACC)","Loyola Maryland (Patriot)","Manhattan (MAAC)","Marist (MAAC)","Marquette (Big East)","Maryland (Big Ten)","Massachusetts (Atlantic 10)","Mercer (Big South)","Michigan (Big Ten)","Monmouth (CAA)","Mount St. Mary's (MAAC)","Navy (Patriot)","New Hampshire (America East)","Niagara (MAAC)","North Carolina (ACC)","Northwestern (Big Ten)","Notre Dame (ACC)","Ohio St. (Big Ten)","Old Dominion (AAC)","Oregon (Pac-12)","Penn (Ivy League)","Penn St. (Big Ten)","Pittsburgh (ACC)","Presbyterian (Big South)","Princeton (Ivy League)","Quinnipiac (MAAC)","Radford (Big South)","Richmond (Atlantic 10)","Robert Morris (MAC)","Rutgers (Big Ten)","Sacred Heart (NEC)","Saint Francis (PA) (NEC)","Saint Joseph's (Atlantic 10)","San Diego St. (MPSF)","Siena (MAAC)","Southern California (Pac-12)","St. Bonaventure (Atlantic 10)","Stanford (Pac-12)","Stetson (ASUN)","Stony Brook (CAA)","Syracuse (ACC)","Temple (AAC)","Towson (CAA)","UAlbany (America East)","UC Davis (Independent)","UConn (Big East)","UMBC (America East)","UMass Lowell (America East)","VCU (Atlantic 10)","Vanderbilt (AAC)","Vermont (America East)","Villanova (Big East)","Virginia (ACC)","Virginia Tech (ACC)","Wagner (NEC)","William &amp; Mary (CAA)","Winthrop (Big South)","Wofford (Big South)","Xavier (Big East)","Yale (Ivy League)","Youngstown St. (MAC)"],[0.459,0.445,0.532,0.5659999999999999,0.517,0.534,0.569,0.514,0.454,0.465,0.496,0.491,0.534,0.515,0.449,0.507,0.492,0.5629999999999999,0.502,0.528,0.495,0.439,0.499,0.544,0.535,0.576,0.472,0.616,0.387,0.499,0.588,0.38,0.469,0.496,0.451,0.401,0.57,0.554,0.513,0.397,0.514,0.437,0.464,0.516,0.418,0.453,0.437,0.494,0.582,0.5590000000000001,0.521,0.514,0.509,0.469,0.364,0.457,0.496,0.5610000000000001,0.469,0.424,0.6899999999999999,0.493,0.469,0.5669999999999999,0.616,0.574,0.586,0.513,0.489,0.516,0.522,0.432,0.465,0.5620000000000001,0.572,0.623,0.425,0.422,0.457,0.535,0.522,0.418,0.334,0.432,0.43,0.438,0.617,0.485,0.48,0.502,0.543,0.524,0.436,0.445,0.489,0.393,0.545,0.481,0.584,0.555,0.55,0.513,0.533,0.468,0.497,0.593,0.423,0.479,0.424,0.477,0.541,0.521,0.5580000000000001,0.474,0.434,0.429,0.504,0.442,0.5639999999999999,0.471],[18.35,15.31,13.74,13,12.18,13.7,14.44,15.07,14.07,14.56,18.93,14.06,17.05,15.44,16.73,13.32,16.11,13.17,12.95,15.27,12.53,15.47,14.53,15.2,16.22,19.19,16.44,14.17,15.86,14.28,15.06,17.12,12.17,17.19,14.75,18.69,17.05,11.86,15.78,17.53,15.4,14.5,14.88,15.33,15.44,14.19,15.83,17.88,14.4,12.5,17.28,19.53,17.78,15.35,17.53,16.53,13.39,17.89,18.12,15.41,12.77,17.24,16.62,15.63,12.82,12.42,13.55,14.3,17.65,18.65,14.16,12.33,11.47,10.14,13.14,11.95,16.24,19.53,13.47,12.68,13.44,15.82,14.82,12.31,15.67,19.35,13.86,13.47,17.41,13.84,15.5,13.42,14.62,11.89,13.8,15.39,13.44,14.94,10.42,12.71,13.5,14.17,15.15,11.86,14.68,13.07,15.31,15.88,15.93,16.31,17.94,11.22,14.16,17.41,16.5,18.56,18.65,18.64,13.12,15.44],[18.35,20.38,18.95,23.11,22.29,21.91,21.28,18.29,23.14,22.88,18.67,18.83,23.26,19.38,17,22.26,21.72,23.39,25.16,20.4,23.47,16.33,21.67,19.27,22.44,19.12,15.94,21.96,19.64,20.94,21.67,18,19.44,17.88,18.75,15.23,23.26,23.62,20.61,17.35,16.2,17.83,22.41,22.2,20.56,20,20.22,21.75,24.65,22.32,21.56,18.18,20.33,20.24,14.87,19.12,21.44,23.89,20.06,17.65,23.09,17.47,18.75,26.26,22.82,24.63,26.75,20.2,20.76,17.53,24.16,19.73,22.05,22.33,26,25.76,16.94,16.29,19.88,24.74,22.44,15.53,17,23.06,18.72,16.47,25.1,21.84,18.06,20.84,23.75,21.37,19.38,18.16,20.75,19.06,23.28,25.35,24.79,23.95,20.75,21.72,22.35,24,23.89,23.57,18.62,21.12,18.2,20.44,19.53,23.78,21,20.24,18.81,16.25,19.35,16.79,22.29,21.39],[2.53,4.69,3.26,6.53,5.35,7.65,6.06,5.71,6.93,5.94,3.33,3.89,7,3.12,2.4,5.26,5.28,7.67,7.95,4.2,5.58,3.47,4.73,4.33,7.28,4.94,1.62,4.78,4.86,3.94,6.33,3.19,4.17,3.81,3.31,3.08,7,7.67,6.56,5.47,2.53,3.22,3.88,5.07,5.39,5.19,5,5.19,4.95,6.32,6.72,5.71,4.39,4.24,2.67,3.82,6.33,5.79,5.06,2.94,7.86,4.18,4.06,8,5.91,8.210000000000001,5.8,5.1,6.06,4,6.58,4.2,5.11,6.81,8.050000000000001,6.33,4.12,2.29,4.06,5.47,4,2.24,2.76,5.5,4.72,3.88,7.48,4.74,5.71,3.95,6.19,4.95,4.06,4.95,5.4,4.5,8.06,4.88,6.95,9.1,4.81,4.44,4.9,6.36,6.05,5.07,3.75,4.24,4.33,4.5,6.35,6.94,4.84,4.88,3.81,3.81,4.12,3.14,5.59,4.89],[7.65,5.69,5.74,5.63,7.71,7.52,6.56,6.64,5.71,9.880000000000001,6,5.06,14.11,7.19,7.6,7.32,8.220000000000001,8.33,6.63,5.27,7.47,6.27,7.07,5.53,8.390000000000001,9.5,5.44,12.65,7.86,7.78,10.61,8.5,6.06,8,6.94,6.46,11.47,8.140000000000001,7.67,9.35,5.07,7.33,9.470000000000001,8.130000000000001,10.72,5.69,7.44,7.81,8.800000000000001,8.949999999999999,9.109999999999999,6.29,6,8.24,5.47,6.18,7.89,12.47,8.69,6.88,6.27,7.12,6,8.529999999999999,7.09,9.789999999999999,12.3,7.9,8.76,9.06,9.529999999999999,5.87,9.529999999999999,6.38,8.27,8.76,7.41,8.880000000000001,6.59,8.58,10.06,6.88,7.18,5.81,9.17,8.710000000000001,8.52,7.05,9.59,8.949999999999999,8.19,5.74,7.69,null,10.65,6.67,6.94,7.59,9,7.62,6.88,9,7,6.86,8.58,7.57,9.56,8.529999999999999,7.8,12.44,8.82,6.06,7.95,9.24,8,8.06,7.76,8.07,10.47,6.67],[0.789,0.844,0.91,0.88,0.889,0.911,0.898,0.836,0.872,0.857,0.789,0.8149999999999999,0.883,0.846,0.76,0.841,0.849,0.91,0.856,0.833,0.863,0.802,0.869,0.841,0.89,0.877,0.762,0.887,0.819,0.859,0.913,0.83,0.915,0.755,0.883,0.717,0.856,0.9389999999999999,0.848,0.782,0.853,0.907,0.884,0.876,0.854,0.86,0.824,0.789,0.904,0.918,0.871,0.735,0.798,0.849,0.796,0.792,0.851,0.8139999999999999,0.844,0.8129999999999999,0.87,0.758,0.77,0.845,0.9340000000000001,0.895,0.898,0.9,0.865,0.8100000000000001,0.866,0.905,0.898,0.9399999999999999,0.924,0.903,0.778,0.8080000000000001,0.866,0.894,0.878,0.871,0.882,0.848,0.87,0.804,0.897,0.865,0.84,0.844,0.851,0.841,0.79,0.888,0.835,0.867,0.906,0.82,0.894,0.874,0.89,0.865,0.827,0.91,0.892,0.912,0.874,0.922,0.82,0.875,0.858,0.921,0.918,0.884,0.821,0.791,0.78,0.725,0.924,0.833],[11.76,12.81,13.84,16,14.29,14.22,16,14.21,14,14.25,14.73,13,15.37,12.69,11.33,14.42,13.44,15.44,14.58,14.87,13.63,11.47,14.67,14.73,14.72,15,11.69,13.39,10.86,12.11,17,11.75,11.61,13.81,12.5,11.31,14.16,15.14,15,12.41,13.93,12.06,12.41,13.87,12.22,11.88,13.33,14.5,15.55,13.77,14.61,14,14.67,11.18,9.470000000000001,12.06,13.5,15.58,13.62,11.47,17.36,12,13.69,17.79,16.05,15.95,16.9,12.55,14.06,12.65,15.26,12.2,12.26,14.62,16.32,17.48,10.94,10.06,12.24,14.84,13.17,11,8.529999999999999,13.44,10.83,11.59,18.71,13.37,12.06,12.05,15.25,14.37,11.12,11.53,11.7,11.17,16.5,15.06,14.89,15.95,13.38,13.61,16.9,13.93,14.58,17.14,11.44,13.12,11.47,12.25,14.12,16.61,14.68,11.18,11.75,11.94,15.35,13.57,15.06,14.22],[14.12,10.06,23.89,11.74,16.82,14.78,15.78,15.79,11.07,17.94,12.2,16.61,20.11,17.94,20.87,12.11,24.33,22.5,15.37,14.53,23.84,14.67,16.27,19.4,15.78,16.31,11.12,25.04,23.43,19.28,20.44,14.88,6.28,14.12,19.19,16.54,20.21,22.52,18.11,16.35,16.93,13.83,18.18,20.07,20.56,13.06,22.06,19.56,3.5,23.32,null,18.18,15.78,20.76,13.93,12.94,16.06,19.26,17.69,20.12,17.45,14.65,20.06,22.11,17.91,23,12.4,18.05,23.59,13.35,18.84,10.87,17.42,14.05,22.45,27.24,26.29,17.71,26,15.42,16.28,23.94,9.59,21.56,23.83,15.71,12.38,21.37,22.94,19.32,8.56,12.89,22.69,20.32,30,9.220000000000001,21.72,19.94,20.42,26.57,13.69,21.83,29.5,14.29,17.11,13.64,19.5,17.47,20.33,19.75,21.12,23,18.84,17.35,22.38,18.75,19.82,22.57,18.53,16],[0.396,0.463,0.456,0.458,0.398,0.442,0.43,0.478,0.385,0.527,0.5,0.355,0.438,0.467,0.317,0.424,0.412,0.529,0.377,0.313,0.481,0.383,0.538,0.447,0.472,0.486,0.421,0.5,0.351,0.469,0.462,0.5,0.44,0.43,0.469,0.48,0.462,0.436,0.364,0.42,0.344,0.364,0.441,0.414,0.34,0.407,0.422,0.491,0.529,0.541,0.33,0.341,0.448,0.389,0.434,0.353,0.44,0.46,0.397,0.436,0.445,0.338,0.353,0.462,0.451,0.429,0.518,0.441,0.44,0.423,0.467,0.429,0.411,0.387,0.44,0.514,0.491,0.333,0.326,0.505,0.433,0.407,0.382,0.4,0.421,0.406,0.484,0.409,0.368,0.345,0.482,0.429,0.479,0.479,0.412,0.443,0.496,0.364,0.382,0.474,0.329,0.414,0.5600000000000001,0.5,0.414,0.457,0.388,0.517,0.372,0.541,0.345,0.505,0.548,0.381,0.355,0.351,0.385,0.508,0.39,0.525],[18.53,11.81,12.95,15.05,18.06,13.35,13.39,13.57,15.57,17.31,14.73,13.33,20.63,15.75,15.13,15.26,15.61,14,15.42,14.8,14.11,15.73,15.4,13,14.94,16.44,11.19,17.87,17.07,16.44,13.89,17.19,14.72,18.06,14.31,13.85,19.89,15.05,15.39,16.59,11.53,17.83,15.53,18.67,18.56,13.75,15.5,15.44,19.5,15.82,18.06,14.71,18.44,16.76,18.2,17.88,14.67,19.58,15.06,14.29,11.32,17,15.56,17.42,13.82,19.58,16.95,15.2,17.35,18.88,17.74,14.8,18.16,null,15.32,15.81,15.82,15.18,13.76,17.74,17.28,13.59,14.12,14.44,18.44,18.47,16.67,15.42,15.71,17.32,18.5,14,17.06,10.79,17.25,13.78,16.44,19,16.16,15.52,16.88,16.83,14.05,14.71,16.16,15.86,18.31,16.53,17.73,18.19,16,12.56,14.16,16.82,15.88,14.38,17.24,15.71,17.47,14.56],[10.88,16.81,13.74,20.84,18.41,21.87,18.44,16.64,20.57,19,13.73,13.67,21.16,13.94,10.4,18.58,17.94,23.22,23.21,14.2,18.74,12.13,17.6,15.53,20.72,15.62,9.25,16.7,14.64,15.28,19.83,14,16.17,12.88,13.94,11.15,20.42,22.52,18.94,16.29,10.8,13.5,15.59,17.2,16.94,15.94,17,18.12,19,19.68,19.28,16.18,17.17,14.18,9.67,12.82,19.06,20.05,15.44,12.59,22.73,13,13.75,23.95,18.77,23.68,22.2,16.7,18.35,13.65,21.37,15.87,17.58,20.9,25,21.76,14.12,10.18,14.71,19.58,15.67,10.71,11.53,19.44,15.94,13.12,24,16.05,15.76,14.89,19.44,17.84,13.69,16.16,17.75,15.56,22.61,18.29,21.74,25.14,15.69,16.28,18.85,21.07,20.11,18.93,13.88,16.29,13.87,16.25,18.24,21.78,17.26,15.71,13.88,12.88,14.76,12.86,18.76,17.22],[0.385,0.38,0.444,0.472,0.419,0.446,0.421,0.391,0.417,0.361,0.373,0.429,0.411,0.427,0.434,0.475,0.392,0.48,0.466,0.362,0.432,0.378,0.406,0.416,0.439,0.432,0.406,0.505,0.436,0.534,0.397,0.384,0.491,0.403,0.387,0.392,0.46,0.545,0.379,0.397,0.36,0.413,0.461,0.366,0.383,0.412,0.393,0.441,0.49,0.477,0.375,0.426,0.473,0.439,0.359,0.443,0.478,0.385,0.423,0.419,0.512,0.431,0.411,0.399,0.471,0.399,0.422,0.467,0.395,0.451,0.4,0.386,0.418,0.464,0.472,0.436,0.473,0.416,0.404,0.418,0.424,0.409,0.393,0.448,0.493,0.461,0.363,0.413,0.458,0.435,0.533,0.453,0.497,0.445,0.441,0.389,0.45,0.371,0.375,0.487,0.429,0.43,0.366,0.455,0.509,0.45,0.394,0.417,0.37,0.44,0.459,0.363,0.442,0.5570000000000001,0.423,0.329,null,0.394,0.371,0.416],[13.82,14.06,12.53,10.53,10.94,9.17,12.17,13.21,13.79,14.06,15.93,13.22,10.95,10,14.33,11.58,11.39,8.720000000000001,10.74,14.6,11.21,14.4,12.6,12.33,10.5,11.75,14,6.22,15.07,9.279999999999999,11.56,17.06,9.56,15.25,13.88,16.69,8.529999999999999,9.33,13.5,17,15.2,13.83,11.35,11.07,14.33,12.06,14.78,12.94,9.300000000000001,7.86,12.22,13.24,12.56,10,15.6,14.29,11.11,10.42,15.25,13.71,7.09,11.71,16.06,11.95,9.550000000000001,8.949999999999999,9.4,9.35,13.06,11.18,10.74,13.13,10.63,8.43,8.91,9.43,12.12,12.82,12.76,10.05,9.890000000000001,14.12,13.53,13.69,10.28,13.82,10.43,12.47,11.41,9.32,11.19,11.42,12.06,11.68,8,14.5,12.44,14.76,7.89,9.57,10.31,11.33,14.05,12.57,11.68,11.36,13.56,11.59,14.4,10.19,10.82,13.33,10.16,8.94,13.56,15.56,16.41,17.57,9.880000000000001,14.44],[8.35,12.12,10.47,14.32,13.06,14.22,12.39,10.93,13.64,13.06,10.4,9.779999999999999,14.16,10.81,8,13.32,12.67,15.56,15.26,10,13.16,8.67,12.87,11.2,13.44,10.69,7.62,11.91,9.789999999999999,11.33,13.5,10.81,12,9.06,10.62,8.08,13.42,14.86,12.39,10.82,8.27,10.28,11.71,12.13,11.56,10.75,12,12.94,14.05,13.36,12.56,10.47,12.78,9.94,7,9,12.72,14.26,10.38,9.65,14.86,8.82,9.69,15.95,12.86,15.47,16.4,11.6,12.29,9.65,14.79,11.67,12.47,14.1,16.95,15.43,10,7.88,10.65,14.11,11.67,8.470000000000001,8.76,13.94,11.22,9.24,16.52,11.32,10.06,10.95,13.25,12.89,9.619999999999999,11.21,12.35,11.06,14.56,13.41,14.79,16.05,10.88,11.83,13.95,14.71,14.05,13.86,10.12,12.06,9.529999999999999,11.75,11.88,14.83,12.42,10.82,10.06,9.06,10.65,9.710000000000001,13.18,12.33],[23.71,24.75,25.37,33.42,30.47,30.91,27.67,25.43,31.79,30.38,23.73,25.06,30.79,26.75,23.07,29.26,29.5,30.61,33.95,27.53,31,24.8,31.8,26.33,29.17,27.38,22.56,28.48,25.57,27.11,30.94,24.19,25.67,23.69,25.38,20.69,31.74,29.9,29.56,24.65,22.73,23.61,30.53,29.73,28.11,27.69,28.11,30.25,34.2,30.5,30.28,24.47,28.17,28.06,20.27,26.41,29.33,32.68,26.88,24.47,30.82,24.24,24.44,35.63,30.45,32.32,33.35,26.3,29.65,24.12,31.53,25.73,30.74,30.67,36.32,33.71,23.53,22.76,26.71,32.63,31.22,22.82,23.76,32.44,26.72,23.12,35.81,28.84,24.94,29.37,28.94,29.42,24.69,25.74,28.75,22.89,31,33.53,32.32,32.29,28.19,31,28.55,31.57,32.37,32.86,23.94,28.53,24.6,27.69,27.94,32,27.79,26.53,26.19,22.12,27.29,22.36,30.82,26.61],[0.352,0.49,0.413,0.428,0.429,0.46,0.448,0.43,0.429,0.43,0.438,0.39,0.46,0.404,0.347,0.455,0.429,0.508,0.45,0.363,0.424,0.349,0.405,0.425,0.461,0.39,0.338,0.418,0.383,0.418,0.436,0.447,0.468,0.383,0.419,0.39,0.423,0.497,0.419,0.439,0.364,0.435,0.383,0.408,0.411,0.388,0.427,0.428,0.411,0.438,0.415,0.428,0.454,0.354,0.345,0.341,0.434,0.436,0.386,0.394,0.482,0.364,0.396,0.448,0.422,0.479,0.492,0.441,0.415,0.4,0.469,0.453,0.406,0.46,0.467,0.458,0.425,0.346,0.399,0.432,0.374,0.371,0.369,0.43,0.42,0.399,0.461,0.392,0.403,0.373,0.458,0.438,0.39,0.436,0.43,0.483,0.47,0.4,0.458,0.497,0.386,0.382,0.489,0.466,0.434,0.422,0.423,0.423,0.388,0.424,0.425,0.464,0.447,0.408,0.384,0.41,0.39,0.435,0.427,0.463],[0.118,0.375,0.316,0.789,0.647,0.826,0.5,0.429,0.5,0.375,0.333,0.278,0.632,0.5,0.267,0.526,0.611,0.667,0.632,0.267,0.579,0.2,0.467,0.4,0.667,0.5,0.125,0.957,0.214,0.667,0.444,0.125,0.556,0.125,0.25,0.077,0.737,0.8100000000000001,0.556,0.235,0.133,0.333,0.412,0.533,0.444,0.25,0.389,0.5620000000000001,0.6,0.864,0.5,0.235,0.556,0.412,0,0.118,0.667,0.632,0.25,0.294,0.864,0.353,0.25,0.789,0.6820000000000001,0.842,0.85,0.6,0.529,0.235,0.6840000000000001,0.333,0.632,0.762,0.955,0.714,0.294,0.235,0.294,0.737,0.611,0.235,0.353,0.438,0.556,0.294,0.8100000000000001,0.526,0.471,0.579,0.625,0.526,0.375,0.632,0.8,0.333,0.556,0.471,0.789,0.857,0.438,0.611,0.65,0.571,0.632,0.571,0.375,0.471,0.267,0.5,0.647,0.611,0.526,0.529,0.5,0.25,0.412,0.286,0.647,0.333],["MAC","Patriot","Pac-12","Patriot","America East","ACC","Patriot","Ivy League","America East","Patriot","Big East","Pac-12","Big South","MAAC","NEC","MAC","AAC","ACC","ASUN","Patriot","Pac-12","Ivy League","Ivy League","Ivy League","Atlantic 10","CAA","ASUN","Big East","MAC","CAA","ACC","Atlantic 10","AAC","MAC","CAA","NEC","MAAC","AAC","Big South","Big South","Atlantic 10","Atlantic 10","Big East","Ivy League","Big South","CAA","Patriot","MAAC","ASUN","AAC","Big Ten","ASUN","MAC","NEC","Atlantic 10","Patriot","Patriot","ASUN","Big South","ACC","Patriot","MAAC","MAAC","Big East","Big Ten","Atlantic 10","Big South","Big Ten","CAA","MAAC","Patriot","America East","MAAC","ACC","Big Ten","ACC","Big Ten","AAC","Pac-12","Ivy League","Big Ten","ACC","Big South","Ivy League","MAAC","Big South","Atlantic 10","MAC","Big Ten","NEC","PA","Atlantic 10","MPSF","MAAC","Pac-12","Atlantic 10","Pac-12","ASUN","CAA","ACC","AAC","CAA","America East","Independent","Big East","America East","America East","Atlantic 10","AAC","America East","Big East","ACC","ACC","NEC","CAA","Big South","Big South","Big East","Ivy League","MAC"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Team<\/th>\n      <th>Draw %<\/th>\n      <th>Turnovers<\/th>\n      <th>Shots on Goal<\/th>\n      <th>Assists<\/th>\n      <th>Caused Turnovers<\/th>\n      <th>Clearing %<\/th>\n      <th>Draw Controls<\/th>\n      <th>Fouls<\/th>\n      <th>Free Positions<\/th>\n      <th>Ground Balls<\/th>\n      <th>Points<\/th>\n      <th>Save %<\/th>\n      <th>Goals Allowed<\/th>\n      <th>Goals<\/th>\n      <th>Shots<\/th>\n      <th>Shot %<\/th>\n      <th>Win %<\/th>\n      <th>Conference<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"bPaginate":false,"dom":"ftp","language":{"info":"Showing _TOTAL_ entries"},"paging":true,"columnDefs":[{"className":"dt-right","targets":[2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"Team","targets":1},{"name":"draw_pctg","targets":2},{"name":"turnovers_per_game","targets":3},{"name":"sog_per_game","targets":4},{"name":"assists_per_game","targets":5},{"name":"caused_turnovers_per_game","targets":6},{"name":"clearing_pctg","targets":7},{"name":"draw_controls_per_game","targets":8},{"name":"fouls_per_game","targets":9},{"name":"free_position_pctg","targets":10},{"name":"ground_balls_per_game","targets":11},{"name":"points_per_game","targets":12},{"name":"save_pctg","targets":13},{"name":"goals_allowed_per_game","targets":14},{"name":"goals_per_game","targets":15},{"name":"shots_per_game","targets":16},{"name":"shot_pctg","targets":17},{"name":"win_pctg","targets":18},{"name":"conference","targets":19}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div>
+</div>
+</div>
+<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div><div id="3ade8a4a-fb1d-4a6c-8409-ac45482d5fc9" class="hidden html-fill-item html-fill-container">
+
+</div>
+</div>
+</div></div><aside id="bslib-sidebar-1" class="sidebar html-fill-container html-fill-item"><div class="html-fill-container html-fill-item">
+<p>This dashboard displays statistics for:</p>
+<table class="caption-top table">
+<tbody>
+<tr class="odd">
+<td><strong>Sport</strong></td>
+<td>Women’s Lacrosse</td>
+</tr>
+<tr class="even">
+<td><strong>Division</strong></td>
+<td>D1</td>
+</tr>
+<tr class="odd">
+<td><strong>Season</strong></td>
+<td>2022-2023</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</div></aside>
+<button class="collapse-toggle" type="button" title="Toggle sidebar" aria-expanded="true" aria-controls="bslib-sidebar-1">
+    <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 16 16" class="bi bi-chevron-left collapse-icon" style="fill:currentColor;" aria-hidden="true" role="img">
+      <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"></path>
+    </svg>
+</button>
+<script data-bslib-sidebar-init="">
+bslib.Sidebar.initCollapsibleAll()
+</script>
+</div>
+
+
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /container fluid -->
+
+<script type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (_event) {
+  if (window.bslib.Card) {
+    window.bslib.Card.initializeAllCards();
+  }
+}); 
+</script>
+  
+
+
+
+</body></html>

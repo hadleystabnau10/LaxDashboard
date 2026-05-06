@@ -1,0 +1,82 @@
+---
+title: "Lecture 05: Map Practice and Synthesis"
+author: "Hadley Stabnau"
+format: pdf
+editor: visual
+---
+
+## Problem 1
+
+# New packages
+ `rnaturalearth`
+ `rnaturalearthdata`
+ `sf`
+ `mapview`
+ 
+ 
+#  New functions 
+ 
+  * plot() will give us a plot with the data and then differentiate plots between the arguments inside. 
+ ex. `plot(data(type = "countries"))`
+ this will differentiate the plots between the different types of countries.  
+ 
+ * A better function for these graphs is mapview::mapview()
+ 
+ ## Problem 2
+ 
+ # Why does the plot made with the following code say "0 countries"?
+```{r}
+ggplot(data = world) +
+    geom_sf() +
+    xlab("Longitude") + ylab("Latitude") +
+    ggtitle("World map", subtitle = paste0("(", length(unique(world$NAME)), " countries)"))
+```
+ 
+ * This is because of the capital in Name on line 4.
+ * the fixed code looks like
+ 
+```{r}
+ggplot(data = world) +
+    geom_sf() +
+    xlab("Longitude") + ylab("Latitude") +
+    ggtitle("World map", subtitle = paste0("(", length(unique(world$name)), " countries)"))
+```
+ 
+ 
+## Problem 3
+
+```{r}
+ggplot(data = world) + 
+  geom_sf(fill= "antiquewhite") + 
+  geom_text(data= world_points,
+            aes(x=X, y=Y, label=name), 
+            color = "darkblue", 
+            fontface = "bold", 
+            check_overlap = FALSE) + 
+  annotate(geom = "text", 
+           x = -90, 
+           y = 26, 
+           label = "Gulf of Mexico", 
+           fontface = "italic", 
+           color = "grey22", 
+           size = 6) +
+  annotation_scale(location = "bl", 
+                   width_hint = 0.5) + 
+  annotation_north_arrow(location = "bl", 
+                         which_north = "true", 
+                         pad_x = unit(0.75, "in"), 
+                         pad_y = unit(0.5, "in"), 
+                         style = north_arrow_fancy_orienteering) +
+  coord_sf(xlim = c(-102.15, -74.12), 
+           ylim = c(7.65, 33.97), 
+           expand = FALSE) + 
+  xlab("Longitude") + 
+  ylab("Latitude") + 
+  ggtitle("Map of the Gulf of Mexico and the Caribbean Sea") + 
+  theme(panel.grid.major = element_line(color = gray(.5), 
+                                        linetype = "dashed", 
+                                        size = 0.5), panel.background = element_rect(fill = "aliceblue")
+  )
+```
+
+ 

@@ -1,0 +1,334 @@
+---
+title: "Women's D1 Lacrosse"
+author: "Hadley Stabnau"
+date: "Due: April 16, 2026"
+format: 
+  dashboard: 
+    nav-buttons: [github]
+    github: https://github.com/hadleystabnau10/demo_repo.git
+logo: images/logo.png
+theme: [sandstone, theme/custom.scss]
+fig-width: 10
+fig-asp: 0.3
+params:
+  year: "2022-2023"
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r}
+#| label: load-packages
+#| message: false
+#load necesary packages
+#install.packages("DT")
+#install.packages("gt")
+
+library(tidyverse)
+library(readxl)
+library(scales)
+library(DT)
+library(gt)
+theme_set(theme_minimal(base_size = 24, base_family = "sans"))
+```
+
+
+```{r}
+#| label: load-data
+#| message: false
+#read in data 
+
+lax_women <- read_csv("/Users/hadleystabnau/Desktop/STAT408/data/lacrosse_women_ncaa_div1_2022_2023.csv")
+```
+
+```{r}
+#set up outline of the dashboard
+#| label: set-inputs
+
+time_period <- paste(params$year)
+```
+
+
+
+#  {.sidebar}
+
+This dashboard displays statistics for:
+
+|              |                     |
+|--------------|---------------------|
+| **Sport** | Women's Lacrosse |
+| **Division**     | D1  |
+| **Season**    | `{r} time_period`   |
+
+----------------------------------------------------------------------
+::: {.collapse="true"}
+
+# All
+```{r}
+#| label: all-values
+#| results: hide
+#mutate the data so that there's a column titles conference.
+library(dplyr)
+library(stringr)
+
+lax_conference <- lax_women |>
+  mutate(conference = str_extract(Team, "(?<=\\().*?(?=\\))"))
+```
+
+```{r}
+library(dplyr)
+#group the data by conference and convert the goals_per_game into average goals_per_game for each conference so it isn't just showing the total number of goals when some conferences have 2 teams and some have 10.
+conference_summary <- lax_conference |>
+  group_by(conference) |>
+  summarise(
+    count = n(),
+    avg_goals_conference = mean(goals_per_game, na.rm = TRUE)
+  )
+```
+
+
+This dashboard desplays statistics for women's division 1 lacrosse data from the 2022-2023 season. 120 teams are included in the division among 18 different regional conferences. The data has been plotted to show goals for vs against for each team. Then, clusters were created based on offensive stats for each team, and then those clusters were compared to a plot of defensive stats for each team. 
+
+We will be looking at various comparisons among the different teams in both offensive and defensive aspects of the game. 
+```{r}
+
+#install.packages("ggrepel")
+library(dplyr)
+library(ggplot2)
+
+#get averages of goals_per_game as well as goals_allowed_per_game
+team_avg <- lax_conference |>
+  group_by(Team) |>
+  summarise(
+    avg_goals_for = mean(goals_per_game, na.rm = TRUE),
+    avg_goals_against = mean(goals_allowed_per_game, na.rm = TRUE),
+    .groups = "drop"
+  ) 
+
+#plot goals for vs goals against
+team_avg |>
+  ggplot(aes(x = avg_goals_for, y = avg_goals_against, label = Team)) +
+  geom_point(color = "steelblue", size = 3) +
+  labs(
+    x = "Goals For",
+    y = "Goals Against"
+  ) +
+  ggrepel::geom_text_repel(size = 3) +
+  theme_minimal()
+
+```
+
+```{r}
+set.seed(123)
+# create clusters
+
+features_df <- lax_conference %>%
+  select(
+    Team,
+    goals_per_game,
+    shot_pctg,
+    turnovers_per_game,
+    caused_turnovers_per_game,
+    save_pctg
+  ) %>%
+  drop_na()
+
+
+features_matrix <- features_df %>%
+  select(-Team)
+
+clusters <- kmeans(scale(features_matrix), centers = 3)
+
+
+lax_clustered <- features_df %>%
+  mutate(cluster = as.factor(clusters$cluster))
+```
+```{r}
+#install.packages("patchwork")
+library(patchwork)
+
+#plot clusters side by side
+p1 <- ggplot(lax_clustered, aes(x = goals_per_game, y = shot_pctg, color = cluster)) +
+  geom_point(size = 2) +
+  theme_minimal() +
+  labs(
+    title = "Lacrosse Team Playing Style Clusters",
+    x = "Goals per Game",
+    y = "Shot Percentage"
+  )
+
+p2 <- ggplot(lax_clustered, aes(x = caused_turnovers_per_game, y = shot_pctg, color = cluster)) +
+  geom_point() +
+  theme_minimal() +
+  labs(
+    x = "Caused Turnovers per Game",
+    y = "Shot Percentage"
+  )
+
+
+```
+```{r}
+p1 + p2
+```
+
+
+
+
+
+# Offensive Stats
+
+
+```{r}
+library(dplyr)
+
+conference_summary <- lax_conference |>
+  group_by(conference) |>
+  summarise(
+    count = n(),
+    avg_goals_conference = mean(goals_per_game, na.rm = TRUE)
+  )
+```
+
+
+```{r}
+library(ggplot2)
+#create plot that groups conference and shows win% on the y axis
+lax_conference |>
+  ggplot(aes(x = conference, y = win_pctg, fill = conference)) +
+  geom_col() +
+  labs(x = "Conference", y = "Win %", title = "Win % Among Conferences") +
+  theme(axis.text.x = element_blank())
+```
+
+```{r}
+#create plot showing shots per game vs those that actually go in goal.
+ggplot(lax_conference, aes(x = shots_per_game, y = shot_pctg)) +
+  geom_point(aes(color = win_pctg), size = 2) +
+  theme_minimal() +
+  labs(
+    title = "Shot Volume vs Efficiency",
+    x = "Shots per Game",
+    y = "Shot Percentage"
+  )
+```
+This tab shows some compared offensive data among the different regions. Average goals among conference was not that interesting, so I plotted the winning % for each conference to see a bit more obvious differences. 
+Then a plot was created to show shot volume vs actual shots that landed in the goal. 
+
+# Defensive Stats
+
+```{r}
+library(dplyr)
+library(knitr)
+library(patchwork)
+
+#create tables showing top ten turnover teams and top ten clearing teams
+top10D <- lax_conference |>
+  group_by(Team) |>
+  summarise(caused_turnovers_per_game) |>
+  arrange(desc(caused_turnovers_per_game)) |>
+  slice_head(n = 10) |>
+  mutate(
+    Rank = row_number()
+  ) |>
+  select(Rank, Team, Caused_Turnovers = caused_turnovers_per_game)
+
+top10DE <- lax_conference |>
+  group_by(Team) |>
+  summarise(clearing_pctg) |>
+  arrange(desc(clearing_pctg)) |>
+  slice_head(n = 10) |>
+  mutate(
+    Rank = row_number()
+  ) |>
+  select(Rank, Team, Clear_Percent = clearing_pctg)
+
+
+kable(top10D, align = "c", caption = "Top 10 Turnover Teams")
+
+kable(top10DE, align = "c", caption = "Top 10 Clearing Teams")
+
+
+
+```
+
+```{r}
+library(dplyr)
+library(ggplot2)
+
+
+#Make a plot based on the table data of the teams present in top ten turnover list.
+
+top10W <- lax_conference |>
+  filter(Team %in% top10D$Team) |>
+  group_by(Team) |>
+  summarise(win_pctg = mean(win_pctg))
+
+p1 <- ggplot(top10W, aes(
+  x = Team, 
+  y = win_pctg,
+  fill = Team
+  )) +
+  geom_col(show.legend = TRUE) +
+  scale_fill_brewer(palette = "Set3") +
+  labs(x = "Team", 
+       y = "Win %", 
+       title = "Turnover Teams",
+       fill = "Team") +
+  theme_minimal(base_size = 12) +
+  theme(
+    legend.position = "right",
+    plot.title = element_text(face = "bold"),
+    axis.text.x = element_blank()
+  )
+```
+
+```{r}
+library(dplyr)
+library(ggplot2)
+
+#make a plot based on the table data of the teams present in the top ten clearing list. 
+
+top10Wi <- lax_conference |>
+  filter(Team %in% top10DE$Team) |>
+  group_by(Team) |>
+  summarise(win_pctg = mean(win_pctg))
+
+p2 <- ggplot(top10Wi, aes(
+  x = Team, 
+  y = win_pctg,
+  fill = Team
+  )) +
+  geom_col(show.legend = TRUE) +
+  scale_fill_brewer(palette = "Set3") +
+  labs(x = "Team", 
+       y = "Win %", 
+       title = "Clearing Teams",
+       fill = "Team") +
+  theme_minimal(base_size = 12) +
+  theme(
+    legend.position = "right",
+    plot.title = element_text(face = "bold"),
+    axis.text.x = element_blank()
+  )
+
+```
+
+```{r}
+#display the plots side-by-side
+p1+p2
+```
+
+Defensive statistic are shown including the tables of top 10 teams. The first table shows the top 10 teams for caused turnovers and second shows the top 10 teams for clearing.
+
+# Data
+
+```{r}
+#display the data used to make all of these plots and graphs.
+lax_conference |>
+  arrange(Team) |>
+  datatable(
+    colnames = c("Team", "Draw %", "Turnovers", "Shots on Goal", "Assists", "Caused Turnovers", "Clearing %", "Draw Controls", "Fouls", "Free Positions", "Ground Balls", "Points", "Save %", "Goals Allowed", "Goals", "Shots", "Shot %", "Win %", "Conference"),
+    options = list(dom = 'ftp', paging = TRUE)
+    )
+```
+
+

@@ -1,0 +1,8 @@
+"0","temp_count <- clean_rivers1 |>"
+"0","  filter(temperature > 25) |>"
+"0","  group_by(site) |>"
+"0","  summarize(count_over_25 = n())"
+"0",""
+"0","ggplot(temp_count, aes(x=site, y=count_over_25, fill = site)) +"
+"0","  geom_col() +"
+"0","  labs(x=""Site"", y=""Count Over 25 Degrees F"")"

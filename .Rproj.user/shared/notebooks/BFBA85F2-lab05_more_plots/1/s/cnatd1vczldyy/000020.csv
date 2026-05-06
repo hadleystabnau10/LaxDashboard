@@ -1,0 +1,23 @@
+"0","library(tidyverse)"
+"0","library(ggplot2)"
+"0",""
+"0",""
+"0","cities1 <- cities |>"
+"0","  mutate(elev_m = 0.3048*elev) |>"
+"0","  group_by(state) |>"
+"0","  summarize(sum(pop), mean(elev_m))"
+"0",""
+"0",""
+"0",""
+"0","cities |>"
+"0","  ggplot(aes(x=state)) +"
+"0","  geom_bar(stat=""identity"") +"
+"0","  labs(x=""State"", y=""Population (thousands)"")"
+"1","[1m[33mError[39m in `geom_bar()`:[22m
+[38;5;232m[33m![38;5;232m Problem while setting up geom.
+[36mℹ[38;5;232m Error occurred in the 1st layer.[39m
+[1mCaused by error in `compute_geom_1()`:[22m
+[38;5;232m[33m![38;5;232m `geom_bar()` requires the following missing
+  aesthetics: [32my[38;5;232m.[39m
+[90mRun `]8;;x-r-run:rlang::last_trace()rlang::last_trace()]8;;` to see where the error occurred.[39m
+"

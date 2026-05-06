@@ -1,0 +1,177 @@
+---
+title: "Homework 3: Baseball Data"
+author: "Hadley Stabnau"
+date: "Jan 28, 2026"
+format: pdf
+---
+
+1. What line of code did you have to run in R Studio before you could successfully run the code from section 3.6 on your own computer? Why did you need to do that? Do you need to do it again the next time you want to run the code from section 3.6 in your computer?
+
+* In order to run the code chunk from 3.6 in my own computer, the line of code that need to be added is `library(dplyr)`. This needs to be done because each time the dplyr package is used in a new quarto doc, it needs to be reloaded. This does not need to be done every time I want to run code from 3.6, only when I create a new quarto document. 
+
+
+
+2. How many variables are in the original `Batting` dataset? Name three or four of them and say what they represent. 
+
+* There are 22 variables in the `Batting` dataset. Some of these variables include: `G` the number of games in which a player played, `HR` homeeruns, `SB` stolen bases and `SO` strikeouts. 
+
+
+
+3. What variables (columns) are in the `batters` dataset that section 3.6 creates from the `Batting` dataset?
+
+* In the `batters` dataset that was created in section 3.6, there are 3 variables (columns). These are `playerID`, `performance`, and `n`. 
+
+
+
+
+4. What does each row of `batters` represent?
+
+* Each different row of `batters` represents a different batter based off of their `playerID`.
+
+
+
+
+5. Take the second code chunk in section 3.6 and remove the line that drops rows with n less than or equal to 100.  show the resulting code and the new plot you get. 
+
+
+```{r, echo: false, warning=FALSE, message=FALSE}
+library(dplyr)
+library(tidyverse)
+library(nycflights13)
+batters <- Lahman::Batting |> 
+  group_by(playerID) |> 
+  summarize(
+    performance = sum(H, na.rm = TRUE) / sum(AB, na.rm = TRUE),
+    n = sum(AB, na.rm = TRUE)
+  )
+
+
+batters |> 
+  ggplot(aes(x = n, y = performance)) +
+  geom_point(alpha = 1 / 10) + 
+  geom_smooth(se = FALSE)
+```
+
+
+6. Let's figure out what the `alpha` argument does. Modify the second code chunk in Section 3.6 by removing the `alpha` argument so that there is nothing inside the parentheses of `geom_point`. Show the resulting code and the new plot you get. Based on this and on the results of ?alpha, what does `alpha` control about the plot? 
+
+```{r}
+batters |> 
+  filter(n > 100) |> 
+  ggplot(aes(x = n, y = performance)) +
+  geom_point() + 
+  geom_smooth(se = FALSE)
+```
+* The `alpha` argument changes the level of translucence of the points on the `ggplot()`. A smaller `alpha` value will result in more translucent points, whereas a larger `alpha` value, or one equal to 1 will give the most opaque points. 
+
+
+
+
+7. Adjust the second code chunk in Section 3.6 to give the plot more formal and informative axis labels, such as "Batting Average" for the vertical axis and "Times at Bat" on the horizontal axis. 
+
+```{r}
+batters |> 
+  filter(n > 100) |> 
+  ggplot(aes(x = n, y = performance)) +
+  geom_point(alpha = 1 / 10) + 
+  geom_smooth(se = FALSE) +
+  labs(x="Times at Bat", y="Batting Average")
+```
+
+
+
+8. Rewrite the first code chunk in Section 3.6 to use the `.by` argument of `summarize` instead of using both the `group_by` and `summarize` functions. 
+
+```{r}
+#| results: false
+batters <- Lahman::Batting |> 
+  summarize(
+    performance = sum(H, na.rm = TRUE) / sum(AB, na.rm = TRUE),
+    n = sum(AB, na.rm = TRUE),
+    .by=playerID
+  )
+batters
+#> # A tibble: 20,985 × 3
+#>   playerID  performance     n
+#>   <chr>           <dbl> <int>
+#> 1 aardsda01      0          4
+#> 2 aaronha01      0.305  12364
+#> 3 aaronto01      0.229    944
+#> 4 aasedo01       0          5
+#> 5 abadan01       0.0952    21
+#> 6 abadfe01       0.111      9
+#> # ℹ 20,979 more rows
+```
+
+
+
+9. Rewrite the second code chunk in Section 3.6 into two separate chunks of code that result in the same final plot. The first code chunk modifies `batters` for plotting by keeping only rows with `n>100`, and the second chunk plots the new `batters` dataset. As a result of your modified code, the `batters` object itself should now only have values of `n` greater than 100. 
+
+ 
+```{r}
+batters <-batters |> 
+  filter(n > 100)  
+  
+
+  ggplot(batters, aes(x = n, y = performance)) +
+  geom_point(alpha = 1 / 10) + 
+  geom_smooth(se = FALSE)
+
+
+```
+
+
+
+10.  In the spirit of the first code chunk in Section 3.6, compute a different summary statistic or two related ones from the `Batting` dataset. Briefly summarize in text what you computed. Make sure you update the name of your new dataset from `batters` to something that makes sense for the summary statistic(s) you computed. 
+
+```{r}
+#| results: false
+library(dplyr)
+library(Lahman)
+Bat <- Batting |> 
+  group_by(playerID) |> 
+  summarize(
+    performance = sum(H, na.rm = TRUE) / sum(AB, na.rm = TRUE),
+    n = sum(AB, na.rm = TRUE),
+    avg_hits_per_game = sum(H, na.rm = TRUE) / sum(G, na.rm = TRUE)
+  )
+batters
+#> # A tibble: 20,985 × 3
+#>   playerID  performance     n
+#>   <chr>           <dbl> <int>
+#> 1 aardsda01      0          4
+#> 2 aaronha01      0.305  12364
+#> 3 aaronto01      0.229    944
+#> 4 aasedo01       0          5
+#> 5 abadan01       0.0952    21
+#> 6 abadfe01       0.111      9
+#> # ℹ 20,979 more rows
+```
+
+* I computed the average hits per game for each player by dividing the total number of times they reached base becasue of a fair ball, by the total number of games played.
+
+
+11. Read sections 4.22-4.4 of R4DS2e, then apply the style tips there on spaces, line breaks and indentation to improve the style of the code chunk in Section 4.6, Exercise 1.
+
+```{r}
+ # Section1  --------------------------------------
+
+library(dplyr)
+library(Lahman)
+flights|>
+  filter(dest=="IAH")|>
+  group_by(year,month,day)|>summarize(n=n(),
+delay=mean(arr_delay,na.rm=TRUE))|>filter(n>10)
+
+# Section2 --------------------------------------
+
+flights|>
+  filter(carrier=="UA",dest%in%c("IAH","HOU"),sched_dep_time>0900,
+         sched_arr_time<2000)|>
+  group_by(flight)|>summarize(delay=mean(
+arr_delay,na.rm=TRUE),
+cancelled=sum(is.na(arr_delay)),n=n())|>filter(n>10)
+```
+
+
+

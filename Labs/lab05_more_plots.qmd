@@ -1,0 +1,261 @@
+---
+title: "STAT 408 Lab 5: More plots"
+author: "Hadley Stabnau"
+format:
+  pdf:
+    geometry:
+      - inner=3cm
+      - outer=4cm
+      - top=1cm
+      - bottom=4cm
+embed-resources: true
+---
+
+\vspace{-2cm}
+
+*Instructions:* Add your name to the YAML header as the author of this lab. Fill in this template document with your text and code answers, making sure not to delete the `\newpage` commands. When you submit this assignment, for each problem, **mark all pages** that contain the instructions and/or your work/results for that problem. Please set YAML code execution options when appropriate in the header or in individual code chunks; just don't change the existing ones.
+
+```{r}
+#install.packages("tinytex")
+#tinytex::install_tinytex(force = TRUE)
+
+
+```
+
+
+# Exam 1 Follow-up
+
+Problems 1-2 are an extension of Exam 1. Pair up with another person you didn't already collaborate with during Exam 1. Code up and try running both your own and your partner's final code from Exam 1, Part 2, Phase 3. If it doesn't work as intended, troubleshoot together until it works. Problems 1-2 are the same, but Problem 1 is for your code and Problem 2 is for your partner's code. For each problem:
+
+- Show the code from Exam 1, Part 2, Phase 3 in a code chunk in your submitted lab document. Use code chunk options to prevent the code from running when you render to pdf, since it may have one or more errors in it.
+- Write a text summary in answer to the following: does the code work as written? If not, what do you have to do to get it working (computing the requested summary statistics and reproducing the plot shown in the exam)?
+- Provide another code chunk with an updated version of the code that works. Let this code run in your pdf and show the results in your report.
+
+```{r}
+
+#| echo: false
+
+# this code creates the dataset you worked with in Exam 1, Part 2
+cities = data.frame(
+  state = c(rep("Montana", 4), 
+            rep("Idaho", 3), 
+            rep("Washington", 3)),
+  city = c("Missoula", "Billings", "Bozeman", "Helena",
+           "Boise", "Idaho Falls", "Twin Falls",
+           "Seattle", "Spokane", "Olympia"),
+  pop = c(80, 120, 60, 35, # population in thousands of people
+          235, 70, 55,
+          800, 230, 56),
+  elev = c(3209, 3212, 4795, 4058, # elevation in ft
+           2850, 4705, 3740,
+           180, 1843, 95)
+)
+```
+
+
+### Problem 1: your code
+
+```{r, eval=FALSE}
+library(tidyverse)
+library(ggplot2)
+
+
+cities1 <- cities |>
+  mutate(elev_m = 0.3048*elev) |>
+  group_by(state) |>
+  summarize(sum(pop), mean(elev_m))
+
+
+
+cities |>
+  ggplot(aes(x=state)) +
+  geom_bar(stat="identity") +
+  labs(x="State", y="Population (thousands)")
+
+```
+
+The code chunk above does not quite work exactly as written. In order to get it to work, I would need to fix the ggplot chunk and add data to the y axis. I also realize I need to use the `cities` data for the graph and not just the `cities1` data frame that I've made from the `cities` data frame.
+
+```{r}
+library(tidyverse)
+library(ggplot2)
+
+
+cities1 <- cities |>
+  mutate(elev_m = 0.3048*elev) |>
+  group_by(state) |>
+  summarize(sum(pop), mean(elev_m))
+
+
+
+cities |>
+  ggplot(aes(x=state, y=pop)) +
+  geom_bar(stat="identity") +
+  labs(x="State", y="Population (thousands)")
+```
+
+
+
+
+
+
+\newpage
+
+### Problem 2: your partner's code
+
+```{r}
+library(tidyverse)
+library(ggplot2)
+
+
+cities1 <- cities |>
+  mutate(elev_m = 0.3048*elev) |>
+  group_by(state) |>
+  summarize(sum(pop), mean(elev_m))
+
+
+
+cities |>
+  ggplot(aes(x=state, y=pop)) +
+  geom_bar(stat="identity") +
+  labs(x="State", y="Population (thousands)")
+
+```
+
+My partners code appears to have worked. 
+
+```{r, message=FALSE}
+library(tidyverse)
+library(ggplot2)
+
+
+cities1 <- cities |>
+  mutate(elev_m = 0.3048*elev) |>
+  group_by(state) |>
+  summarize(sum(pop), mean(elev_m))
+
+
+
+cities |>
+  ggplot(aes(x=state, y=pop)) +
+  geom_bar(stat="identity") +
+  labs(x="State", y="Population (thousands)")
+
+```
+
+
+
+
+
+
+\newpage
+
+# R4DS2e, Chapter 9
+
+Read and work through Sections 9.1-9.4, then work on these problems for your lab. You might also like checking out [this additional reference](https://www.cedricscherer.com/2019/08/05/a-ggplot2-tutorial-for-beautiful-plotting-in-r/) for some things such as [faceting (making multi-panel plots)](https://www.cedricscherer.com/2019/08/05/a-ggplot2-tutorial-for-beautiful-plotting-in-r/#panels).
+
+### Problem 3
+
+Using the `mpg` dataset, create a scatterplot of `hwy` vs. `displ` where the points are pink filled-in triangles. Show your code and the resulting plot.
+
+```{r, echo=FALSE}
+library(ggplot2)
+mpg |>
+  ggplot(aes(x=displ, y=hwy)) +
+  geom_point(color= "pink", shape= "triangle") +
+  labs(x="Engine Size (L)", y="Highway")
+```
+
+Then create a scatterplot of `hwy` vs. `displ` where the points are all filled-in squares but the color is a function of fuel type. Show your code and the resulting plot.
+
+```{r}
+library(ggplot2)
+mpg |>
+  ggplot(aes(x=displ, y=hwy, color=fl)) +
+  geom_point(shape= "square") +
+  labs(x="Engine Size (L)", y="Highway")
+```
+
+
+
+
+
+
+\newpage
+
+### Problem 4
+
+Why did the following code not result in a plot with blue points? Fix the code and show both the updated code and the resulting plot.
+
+```{r, echo=TRUE, eval=TRUE}
+#| eval: false
+
+ggplot(mpg) +
+geom_point(aes(x = displ, y = hwy, color = "blue"))
+
+```
+
+The above code was not resulting in the scatter plot that we wanted because the x and y aesthetics were put inside of the geom_point, not the geomplot. This simply labeled the points with "blue" rather than making the points actuallly appear blue. 
+
+```{r}
+mpg |>
+ggplot(aes(x = displ, y = hwy )) + 
+  geom_point(color = "blue")
+```
+
+
+
+
+
+\newpage
+
+### Problem 5
+
+Run the following code and look at the differences among the resulting plots. Summarize for yourself in text (a) how you can tell when to use `drv ~ .` versus `. ~ drv` in `facet_grid` if you facet by just one variable called `drv`, and (b) how to tell which variable to type first when you facet by two variables. (This problem does not require you to provide additional code or results, just a text summary of the differences.)
+
+```{r}
+#| eval: false
+
+ggplot(mpg) + 
+  geom_point(aes(x = displ, y = hwy)) +
+  facet_grid(drv ~ .)
+
+ggplot(mpg) + 
+  geom_point(aes(x = displ, y = hwy)) +
+  facet_grid(. ~ drv)
+
+ggplot(mpg) + 
+  geom_point(aes(x = displ, y = hwy)) +
+  facet_grid(cyl ~ drv)
+
+ggplot(mpg) + 
+  geom_point(aes(x = displ, y = hwy)) +
+  facet_grid(drv ~ cyl)
+```
+
+a. when fauceting only with the variable called `drv`, the difference between using the `drv~` argument vs the `~drv` argument is that the first one gives a plot of highway mpg for each drivetrain type. The second one gives a plot of engine displacement for each drivetrain type. These are almost like the `pivot_longer` and `pivot_wider` versions.
+b. When fauceting two variables, the one that is listed first is the one on the side of the y-axis and the second listed one goes on the top of the x-axis. 
+
+
+
+
+\newpage
+
+### Problem 6
+
+Why are some of the facets in the plot below empty? (Provide your answer in text.)
+
+```{r}
+#| eval: false
+
+# why are some facets in this plot empty?
+ggplot(mpg, aes(x = displ, y = hwy)) + 
+  geom_point() + 
+  facet_grid(drv ~ cyl, scales = "free")
+
+# hint: you can try this code too and see if it sheds some light
+ggplot(mpg) + 
+  geom_point(aes(x = drv, y = cyl))
+```
+
+It appears that some of the faucets on the first plot are empty, because there is no vehicle that fits in that "category" of vehicles with 4 or 5 cylinders and rear-wheel drive as well as 5 cylinder 4-wheel drive. The second version of graph shows that there are no points at the intersection of rear-wheel derive and 4-5 cylinder vehicles and the 4-wheel drive 5 cylinder. 

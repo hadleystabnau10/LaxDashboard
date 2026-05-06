@@ -1,0 +1,90 @@
+---
+title: "Homework 2: Reference Sheet"
+author: "Hadley Stabnau"
+date: "Jan 27, 2026"
+format: pdf
+---
+
+## Tips and Tricks
+
+* **Must load packages** at the beginning of the document/before you try to do anything with them.
+
+
+
+* **If you're curious** about a line of code, package, dataset etc., simply type ? followed by the "title" of the thing you're wondering about.
+
+
+
+
+* **Message=FALSE** takes away the long, unnecessary message that comes with packages like tidyverse.
+
+```{r, message= FALSE}
+library(tidyverse)
+?tidyverse
+
+```
+
+
+
+
+
+* **`relocate()`** moves variables around and by default, moves them to the front. 
+
+```{r}
+library(nycflights13)
+flights |>
+  relocate(air_time,)
+```
+
+
+
+
+
+* **`rename()`** keeps all existing variables and just renames those that you tell it to.
+
+```{r}
+flights |>
+  rename(tail_num=tailnum)
+```
+
+
+
+
+
+* **`select()`** renames variables, inside of the parenthesis use `=` and put the new name on the LHS and the old name on the RHS. But select gets rid of the other columns not being called upon. 
+
+```{r}
+flights |>
+  select(tail_num=tailnum)
+```
+
+
+
+* **scripts** don't have any text formatting, only code and code comments. They're useful for runing code on a server or computing cluster.
+
+
+* **comments** are ignored by r and only for humans reading the code. Goes from wherever the # starts until the end of that line. 
+
+
+* **`mean(dataset)`** gives you the mean of a data set. There are also functions like this for `median()`, and `
+
+
+* **to make a ggplot,** use the following example. outline:
+
+```{r}
+library(nycflights13)
+
+
+ggplot(data=flights, mapping=aes(x=dep_time, y=arr_time)) +
+  geom_point()
+```
+
+
+
+* **pipes** |>
+
+
+
+
+
+

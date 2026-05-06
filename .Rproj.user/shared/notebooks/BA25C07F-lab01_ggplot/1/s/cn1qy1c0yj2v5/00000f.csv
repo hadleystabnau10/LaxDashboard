@@ -1,0 +1,6 @@
+"0","# Code chunk 1"
+"0","ggplot("
+"0","  data = penguins,"
+"0","  mapping = aes(x = species, y = bill_depth_mm)"
+"0",") +"
+"0","  geom_point()"
