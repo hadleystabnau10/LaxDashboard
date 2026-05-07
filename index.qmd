@@ -322,6 +322,7 @@ Defensive statistic are shown including the tables of top 10 teams. The first ta
 
 # Data
 
+
 ```{r}
 #display the data used to make all of these plots and graphs.
 lax_conference |>
@@ -332,4 +333,4 @@ lax_conference |>
     )
 ```
 
-
+This is the data that was used to create each of these graphs and plots. The data was taken from the SCORE sports data repository. 
